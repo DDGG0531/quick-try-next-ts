@@ -1,0 +1,67 @@
+{
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.quickSuggestions": {
+    "strings": true
+  },
+  "todo-tree.highlights.defaultHighlight": {
+    "type": "text-and-comment",
+    "gutterIcon": true,
+    "opacity": 70
+  },
+  "todo-tree.highlights.customHighlight": {
+    "BUG": {
+      "icon": "bug",
+      "foreground": "#ffffff",
+      "background": "#ef4444",
+      "iconColour": "#ef4444"
+    },
+    "HACK": {
+      "icon": "squirrel",
+      "foreground": "#ffffff",
+      "background": "#22c55e",
+      "iconColour": "#22c55e"
+    },
+    "TODO": {
+      "icon": "bookmark",
+      "foreground": "#ffffff",
+      "iconColour": "#a78bfa"
+    },
+    "FIXME": {
+      "icon": "zap",
+      "foreground": "#ffffff",
+      "background": "#fbbf24",
+      "iconColour": "#fbbf24"
+    },
+    "OPT": {
+      "icon": "tools",
+      "foreground": "#ffffff",
+      "background": "#0ea5e9",
+      "iconColour": "#0ea5e9"
+    },
+    "HL": {
+      "icon": "flame",
+      "foreground": "#ffffff",
+      "background": "#f9a8d4",
+      "iconColour": "#f9a8d4"
+    }
+  },
+  "todo-tree.general.tags": ["BUG", "HACK", "FIXME", "OPT", "TODO", "HL"],
+  "todo-tree.regex.regex": "(//|#|<!--|/\\*|^\\s*\\*)\\s*($TAGS)",
+  "todo-tree.filtering.excludeGlobs": [
+    "**/vendor/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/bower_components/**",
+    "**/build/**",
+    "**/.vscode/**",
+    "**/.github/**",
+    "**/_output/**",
+    "**/*.min.*",
+    "**/*.map"
+  ]
+}
