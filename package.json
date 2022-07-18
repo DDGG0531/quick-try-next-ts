@@ -16,7 +16,9 @@
     "react-infinite-scroll-component": "^6.1.0",
     "react-query": "4.0.0-beta.23",
     "tailwindcss": "^3.1.6",
-    "zustand": "^4.0.0-rc.2"
+    "zustand": "^4.0.0-rc.2",
+    "yup": "^0.32.11",
+    "@hookform/resolvers": "^2.9.6"
   },
   "devDependencies": {
     "@types/node": "18.0.6",
