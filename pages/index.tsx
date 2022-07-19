@@ -2,11 +2,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { IUser, Gender } from '@/libs/interfaces/IUser'
+import { isValid } from 'date-fns'
 
 /**
  * 嘗試react-hook-form 整合 ts 整合yup
  *
- * 塑出表單：包含姓名、電話、年紀、性別
+ * 塑出表單：包含姓名、電話、年紀、性別、生日
  */
 
 const formSchema: yup.SchemaOf<IUser> = yup.object().shape({
@@ -16,7 +17,11 @@ const formSchema: yup.SchemaOf<IUser> = yup.object().shape({
   gender: yup
     .mixed<Gender>()
     .oneOf(Object.values(Gender), '性別為必填')
+    .required('必填'),
+  birthday: yup
+    .string()
     .required('必填')
+    .test('date', '錯誤時間格式', value => isValid(new Date(value as string)))
 })
 
 // Try defaultUser1 for create、defaultUser2 for edit、defaultUser3部分初始化
@@ -25,7 +30,8 @@ const defaultUser2 = {
   name: 'Jim',
   phone: '0900000100',
   age: 10,
-  gender: Gender['Male']
+  gender: Gender['Male'],
+  birthday: '2022-07-11'
 }
 const defaultUser3 = {
   name: 'Jim'
@@ -37,7 +43,14 @@ export default function HomePage() {
     handleSubmit,
     formState: { errors }
   } = useForm<IUser>({
-    resolver: yupResolver(formSchema),
+    resolver: async (data, context, options) => {
+      console.log('[validation]data', data)
+      console.log(
+        'validation result!!!',
+        await yupResolver(formSchema)(data, context, options)
+      )
+      return yupResolver(formSchema)(data, context, options)
+    },
     defaultValues: defaultUser1
   })
 
@@ -93,6 +106,20 @@ export default function HomePage() {
             </select>
             <span className="block text-danger">
               {errors.gender ? errors.gender?.message : ''}
+            </span>
+          </label>
+
+          <label className="block">
+            <span className="block text-sm font-medium text-slate-700">
+              生日
+            </span>
+            <input
+              {...register('birthday')}
+              type="date"
+              className={inputClass}
+            />
+            <span className="block text-danger">
+              {errors.birthday ? errors.birthday?.message : ''}
             </span>
           </label>
 

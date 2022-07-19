@@ -8,4 +8,5 @@ export interface IUser {
   phone: string
   age: number
   gender: Gender
+  birthday: string
 }
