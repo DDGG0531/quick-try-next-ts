@@ -13,7 +13,10 @@ import { isValid } from 'date-fns'
 const formSchema: yup.SchemaOf<IUser> = yup.object().shape({
   name: yup.string().required('必填'),
   phone: yup.string().required('必填'),
-  age: yup.number().typeError('年紀必須為數字').required('必填'),
+  age: yup
+    .number()
+    .transform(value => (isNaN(value) ? undefined : value))
+    .required('必填'),
   gender: yup
     .mixed<Gender>()
     .oneOf(Object.values(Gender), '性別為必填')
