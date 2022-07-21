@@ -40,7 +40,13 @@ function Item() {
         layout
       />
       <AnimatePresence>
-        {isOpen && <Content toggleOpen={toggleOpen} />}
+        {isOpen ? (
+          <Content toggleOpen={toggleOpen} />
+        ) : (
+          <div className="w-full rounded bg-blue text-center text-white">
+            空
+          </div>
+        )}
       </AnimatePresence>
     </motion.li>
   )
