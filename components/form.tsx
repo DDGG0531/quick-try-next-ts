@@ -3,6 +3,12 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import * as yup from 'yup'
 import { IUser, Gender } from '@/libs/interfaces/IUser'
 import { isValid } from 'date-fns'
+import {
+  FormControl,
+  FormErrorMessage,
+  FormLabel,
+  Input
+} from '@chakra-ui/react'
 
 const formSchema: yup.SchemaOf<IUser> = yup.object().shape({
   name: yup.string().required('必填'),
@@ -58,7 +64,23 @@ export default function Form({ submit }) {
     <div className="flex w-full justify-center">
       <section className="rounded bg-gray-100 p-5">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <label className="block">
+          <FormControl isInvalid={!!errors['name']}>
+            <FormLabel htmlFor={'name'}>{'name'}</FormLabel>
+
+            <Input
+              id={'name'}
+              variant="flushed"
+              placeholder={'name'}
+              className="placeholder:text-gray-medium"
+              {...register('name')}
+            />
+
+            <FormErrorMessage>
+              {errors['name'] && errors['name'].message}
+            </FormErrorMessage>
+          </FormControl>
+
+          {/* <label className="block">
             <span className="block text-sm font-medium text-slate-700">
               名稱
             </span>
@@ -66,7 +88,7 @@ export default function Form({ submit }) {
             <span className="block text-danger">
               {errors.name ? errors.name?.message : ''}
             </span>
-          </label>
+          </label> */}
 
           <label className="block">
             <span className="block text-sm font-medium text-slate-700">

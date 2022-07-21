@@ -55,11 +55,6 @@ function Content({ toggleOpen }) {
       exit={{ opacity: 0 }}
       className="w-full"
     >
-      {/* <input autoFocus />
-      <div className="mt-5 h-3 w-full rounded bg-pink-200" />
-      <div className="mt-5 h-3 w-full rounded bg-pink-200" />
-      <div className="mt-5 h-3 w-full rounded bg-pink-200" /> */}
-
       <Form submit={toggleOpen} />
     </motion.div>
   )
