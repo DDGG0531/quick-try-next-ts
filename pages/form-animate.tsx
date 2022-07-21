@@ -1,5 +1,6 @@
 import { AnimatePresence, LayoutGroup, motion } from 'framer-motion'
 import { useState } from 'react'
+import Form from '@/components/form'
 
 export default function FormAnimate() {
   return (
@@ -29,29 +30,37 @@ function Item() {
   return (
     <motion.li
       layout
-      onClick={toggleOpen}
       initial={{ borderRadius: 10 }}
-      className="flex flex-col gap-5 bg-gray p-5"
+      className="flex flex-col gap-5 bg-red-300 px-1"
     >
       {/* avatar */}
-      <motion.div className="h-10 w-10 rounded-full bg-blue-200" layout />
-      <AnimatePresence>{isOpen && <Content />}</AnimatePresence>
+      <motion.div
+        onClick={toggleOpen}
+        className="h-10 w-10  rounded-full bg-blue-200"
+        layout
+      />
+      <AnimatePresence>
+        {isOpen && <Content toggleOpen={toggleOpen} />}
+      </AnimatePresence>
     </motion.li>
   )
 }
 
-function Content() {
+function Content({ toggleOpen }) {
   return (
     <motion.div
       layout
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
+      className="w-full"
     >
-      <input autoFocus />
+      {/* <input autoFocus />
       <div className="mt-5 h-3 w-full rounded bg-pink-200" />
       <div className="mt-5 h-3 w-full rounded bg-pink-200" />
-      <div className="mt-5 h-3 w-full rounded bg-pink-200" />
+      <div className="mt-5 h-3 w-full rounded bg-pink-200" /> */}
+
+      <Form submit={toggleOpen} />
     </motion.div>
   )
 }
