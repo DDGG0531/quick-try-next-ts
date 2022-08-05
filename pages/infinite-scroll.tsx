@@ -1,6 +1,6 @@
 import React from 'react'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { useInfiniteQuery } from 'react-query'
+import { useInfiniteQuery } from '@tanstack/react-query'
 import axios, { AxiosResponse } from 'axios'
 import { flatten } from 'lodash-es'
 
