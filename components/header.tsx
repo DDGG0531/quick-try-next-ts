@@ -23,7 +23,7 @@ export default function Header() {
           setCount(count + 1)
         }}
       >
-        {count}
+        數字：{count}
       </div>
     </div>
   )
