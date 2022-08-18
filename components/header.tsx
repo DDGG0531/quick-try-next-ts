@@ -11,6 +11,10 @@ export default function Header() {
       <Link href="/ssr">
         <a>SSR</a>
       </Link>
+
+      <Link href="/static">
+        <a>Static</a>
+      </Link>
     </div>
   )
 }
