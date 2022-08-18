@@ -4,6 +4,7 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { useState } from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../chakra'
+import Header from '@/components/header'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -20,6 +21,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
+        <Header />
         <Component {...pageProps} />
       </ChakraProvider>
     </QueryClientProvider>
