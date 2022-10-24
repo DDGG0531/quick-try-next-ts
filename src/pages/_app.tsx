@@ -18,6 +18,11 @@ function MyApp({ Component, pageProps }: AppProps) {
         }
       })
   )
+
+  console.log('show this line')
+  let a = true ?? 10
+  console.log('show this line ??', 10)
+
   return (
     <QueryClientProvider client={queryClient}>
       <ChakraProvider theme={theme}>
