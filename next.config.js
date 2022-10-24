@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: false,
+  swcMinify: true,
   typescript: {
     // 暫時
     // !! WARN !!
@@ -9,10 +9,6 @@ const nextConfig = {
     // your project has type errors.
     // !! WARN !!
     ignoreBuildErrors: true
-  },
-  webpack: config => {
-    config.optimization.minimize = false
-    return config
   }
 }
 
@@ -25,11 +21,5 @@ const getDirectories = source =>
 
 const arr = getDirectories('node_modules/@chakra-ui')
 const withTM = require('next-transpile-modules')([...arr]) // pass the modules you would like to see transpiled
-
-// const packageJSON = require('./package.json')
-// const transpiledPackages = Object.keys(packageJSON.dependencies).filter(it =>
-//   it.includes('@chakra-ui/')
-// )
-// const withTM = require('next-transpile-modules')(transpiledPackages)
 
 module.exports = withTM(nextConfig)
