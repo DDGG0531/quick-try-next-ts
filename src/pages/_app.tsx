@@ -1,10 +1,16 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import {
+  MutationCache,
+  QueryCache,
+  QueryClient,
+  QueryClientProvider
+} from '@tanstack/react-query'
 import { useState } from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../../chakra'
 import Header from '@/components/header'
+import toast, { Toaster } from 'react-hot-toast'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -15,13 +21,25 @@ function MyApp({ Component, pageProps }: AppProps) {
             refetchOnWindowFocus: false,
             retry: 0
           }
-        }
+        },
+        queryCache: new QueryCache({
+          onError: (error, query) => {
+            const handleLocal = query.meta?.handleLocal
+            if (!handleLocal) {
+              toast.error(`全域有錯誤: ${error?.response.data.error}`)
+            }
+          }
+        }),
+        mutationCache: new MutationCache({
+          onError: (error, _, __, mutation) => {
+            const handleLocal = mutation.meta?.handleLocal
+            if (!handleLocal) {
+              toast.error(`全域有錯誤M: ${error?.response.data.error}`)
+            }
+          }
+        })
       })
   )
-
-  console.log('show this line')
-  let a = true ?? 10
-  console.log('show this line ??', 10)
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -29,6 +47,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Header />
         <Component {...pageProps} />
       </ChakraProvider>
+      <Toaster />
     </QueryClientProvider>
   )
 }
