@@ -6,49 +6,47 @@ import {
   QueryClient,
   QueryClientProvider
 } from '@tanstack/react-query'
-import { useState } from 'react'
+import {
+  createContext,
+  startTransition,
+  Suspense,
+  useEffect,
+  useRef,
+  useState
+} from 'react'
 import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../../chakra'
 import Header from '@/components/header'
 import toast, { Toaster } from 'react-hot-toast'
+import { useTestStore } from '@/store/test'
+import shallow from 'zustand/shallow'
+import dynamic from 'next/dynamic'
+import { store } from '@/libs/redux/store'
+
+import { Provider } from 'react-redux'
+
+export const BasicContext = createContext(undefined)
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [queryClient] = useState(
-    () =>
-      new QueryClient({
-        defaultOptions: {
-          queries: {
-            refetchOnWindowFocus: false,
-            retry: 0
-          }
-        },
-        queryCache: new QueryCache({
-          onError: (error, query) => {
-            const handleLocal = query.meta?.handleLocal
-            if (!handleLocal) {
-              toast.error(`全域有錯誤: ${error?.response.data.error}`)
-            }
-          }
-        }),
-        mutationCache: new MutationCache({
-          onError: (error, _, __, mutation) => {
-            const handleLocal = mutation.meta?.handleLocal
-            if (!handleLocal) {
-              toast.error(`全域有錯誤M: ${error?.response.data.error}`)
-            }
-          }
-        })
-      })
-  )
-
+  const [num, setNum] = useState(1)
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Header />
+    <Provider store={store}>
+      <BasicContext.Provider
+        value={{
+          num,
+          setNum
+        }}
+      >
         <Component {...pageProps} />
-      </ChakraProvider>
-      <Toaster />
-    </QueryClientProvider>
+      </BasicContext.Provider>
+    </Provider>
+    // <QueryClientProvider client={queryClient}>
+    //   <ChakraProvider theme={theme}>
+    //     <Header />
+    //     <Component {...pageProps} />
+    //   </ChakraProvider>
+    //   <Toaster />
+    // </QueryClientProvider>
   )
 }
 

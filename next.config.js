@@ -20,6 +20,6 @@ const getDirectories = source =>
     .map(dirent => `@chakra-ui/${dirent.name}`)
 
 const arr = getDirectories('node_modules/@chakra-ui')
-const withTM = require('next-transpile-modules')([...arr]) // pass the modules you would like to see transpiled
+// const withTM = require('next-transpile-modules')([...arr]) // pass the modules you would like to see transpiled
 
-module.exports = withTM(nextConfig)
+module.exports = nextConfig
