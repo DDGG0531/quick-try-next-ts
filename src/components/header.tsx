@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
+import { event } from 'nextjs-google-analytics'
 
 export default function Header() {
   const [count, setCount] = useState(0)
@@ -24,6 +25,10 @@ export default function Header() {
       <div
         className="ml-auto cursor-pointer rounded bg-green px-5 text-center"
         onClick={() => {
+          event('CurrentCount', {
+            category: 'Contact',
+            label: `${count + 1}`
+          })
           setCount(count + 1)
         }}
       >

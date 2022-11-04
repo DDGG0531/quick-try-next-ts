@@ -1,5 +1,5 @@
 import '../styles/globals.css'
-import type { AppProps } from 'next/app'
+import type { AppProps, NextWebVitalsMetric } from 'next/app'
 import {
   MutationCache,
   QueryCache,
@@ -11,6 +11,27 @@ import { ChakraProvider } from '@chakra-ui/react'
 import theme from '../../chakra'
 import Header from '@/components/header'
 import toast, { Toaster } from 'react-hot-toast'
+import { GoogleAnalytics, event } from 'nextjs-google-analytics'
+
+const gaMeasurementId = 'G-69L90MFTQJ'
+
+export function reportWebVitals({
+  id,
+  name,
+  label,
+  value
+}: NextWebVitalsMetric) {
+  event(
+    name,
+    {
+      category: label === 'web-vital' ? 'Web Vitals' : 'Next.js custom metric',
+      value: Math.round(name === 'CLS' ? value * 1000 : value), // values must be integers
+      label: id, // id unique to current page load
+      nonInteraction: true // avoids affecting bounce rate.
+    },
+    gaMeasurementId
+  )
+}
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(
@@ -42,13 +63,17 @@ function MyApp({ Component, pageProps }: AppProps) {
   )
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ChakraProvider theme={theme}>
-        <Header />
-        <Component {...pageProps} />
-      </ChakraProvider>
-      <Toaster />
-    </QueryClientProvider>
+    <>
+      <GoogleAnalytics trackPageViews gaMeasurementId={gaMeasurementId} />
+
+      <QueryClientProvider client={queryClient}>
+        <ChakraProvider theme={theme}>
+          <Header />
+          <Component {...pageProps} />
+        </ChakraProvider>
+        <Toaster />
+      </QueryClientProvider>
+    </>
   )
 }
 
