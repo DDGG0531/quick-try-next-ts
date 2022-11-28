@@ -22,6 +22,10 @@ export default function Header() {
         <a>order</a>
       </Link>
 
+      <Link href="/comment">
+        <a>comment</a>
+      </Link>
+
       <div
         className="ml-auto cursor-pointer rounded bg-green px-5 text-center"
         onClick={() => {
