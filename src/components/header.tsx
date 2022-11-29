@@ -26,6 +26,10 @@ export default function Header() {
         <a>comment</a>
       </Link>
 
+      <Link href="/clamp">
+        <a>clamp</a>
+      </Link>
+
       <div
         className="ml-auto cursor-pointer rounded bg-green px-5 text-center"
         onClick={() => {

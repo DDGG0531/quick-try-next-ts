@@ -69,8 +69,11 @@ module.exports = {
       },
       aspectRatio: {
         '4/3': '4 / 3'
+      },
+      transitionProperty: {
+        height: 'height'
       }
     }
   },
-  plugins: [require('@tailwindcss/forms')]
+  plugins: [require('@tailwindcss/forms'), require('@tailwindcss/line-clamp')]
 }

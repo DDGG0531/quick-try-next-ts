@@ -9,6 +9,9 @@ const nextConfig = {
     // your project has type errors.
     // !! WARN !!
     ignoreBuildErrors: true
+  },
+  images: {
+    domains: ['lh3.googleusercontent.com']
   }
 }
 

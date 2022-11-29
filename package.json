@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^2.0.12",
     "@chakra-ui/react": "^2.4.1",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
@@ -20,7 +21,7 @@
     "@types/react-lines-ellipsis": "^0.15.1",
     "axios": "^1.2.0",
     "date-fns": "^2.29.3",
-    "framer-motion": "^7.6.12",
+    "framer-motion": "^7.6.15",
     "lodash-es": "^4.17.21",
     "next": "12.3.1",
     "next-transpile-modules": "^9.1.0",
@@ -36,6 +37,7 @@
     "zustand": "^4.1.4"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.2",
     "@types/node": "18.11.9",
     "@types/react": "18.0.25",
     "@types/react-dom": "18.0.9",
